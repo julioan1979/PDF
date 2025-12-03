@@ -1,5 +1,5 @@
 """
-Flask application entry point for the PDF Emissor web service.
+Application entry point for the PDF Emissor service.
 """
 
 import os
@@ -13,14 +13,13 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-from src.pdf_emissor import PDFEmissor
-from src.airtable_client import AirtableClient
-from src.supabase_client import SupabaseClient
+from pdf_emissor import PDFEmissor
+from airtable_client import AirtableClient
+from supabase_client import SupabaseClient
 
 
-def create_app():
-    """Create and configure the application."""
-    # Initialize clients
+def initialize_clients():
+    """Initialize and return all service clients."""
     airtable_client = AirtableClient()
     supabase_client = SupabaseClient()
     pdf_emissor = PDFEmissor()
@@ -38,5 +37,5 @@ def create_app():
 
 
 if __name__ == "__main__":
-    app = create_app()
+    clients = initialize_clients()
     print("Application ready!")
